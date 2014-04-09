@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Yun controller</title>
+	<script type='text/javascript' src='js/jquery-1.8.2.min.js' ></script>
+	<script src='js/jquery.form.js'></script>
+	<link href='css/bootstrap.min.css' rel='stylesheet' media='screen'>
+</head>
+<body>
+
+<div class='container'>
+	<h1>Yun Controller</h1>
+		<input type='input' value='' id='command' placeholder='~Enter command' />
+	<input type='submit' value='Submit' id='submit'/>
+	<pre class="alert alert-success"></pre>
+</div>
+
+<script type='text/javascript'>
+$('#command').keydown(function(e) {
+	if (e.which == 13) {
+		$('#submit').click();
+	} 
+});
+$('#submit').click(function() {
+	$.ajax({
+		url: '/arduino/' + $('#command').val(),
+		success: function(data) {
+			$('.alert-success').html(data);
+		}
+	});
+});
+</script>
+</body>
+</html>
